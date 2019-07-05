@@ -1,0 +1,28 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-07-05T19:22:24Z",
+  "id": "journey-of-an-api",
+  "duration": 60,
+  "title": "Journey of an API",
+  "authors": "Gautam Chitnis",
+  "summary": "In this codelab, you'll build an installable, Progressive Web App, which loads quickly, even on flaky networks, and when launched looks like any other installed app.",
+  "source": "1b38TdQcWxvZHF98tDKN3ctpMqKSUt_zba7ls9Tn2zjE",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Web"
+  ],
+  "tags": [
+    "api",
+    "html",
+    "js",
+    "web"
+  ],
+  "feedback": "https://github.com/gautamchitnis/api-workshop-codelab/issues",
+  "url": "journey-of-an-api"
+}

@@ -1,0 +1,286 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Journey of an API</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="journey-of-an-api"
+                  title="Journey of an API"
+                  environment="web"
+                  feedback-link="https://github.com/gautamchitnis/api-workshop-codelab/issues">
+    
+      <google-codelab-step label="Introduction" duration="10">
+        <p class="image-container"><img style="width: 378.00px" src="img\f541344ddd47ae0a.png"></p>
+<p><strong>Last Updated:</strong> 2019-07-01</p>
+<h2 is-upgraded><strong>What is an API?</strong></h2>
+<p>An application programming interface (API) is a set of subroutine definitions, communication protocols, and tools for building software. A good API makes it easier to develop a computer program by providing all the building blocks, which are then put together by the programmer.</p>
+<p>An API may be for a web-based system, operating system, database system, computer hardware, or software library.</p>
+<p>An API specification can take many forms, but often includes specifications for routines, data structures, object classes, variables, or remote calls. Documentation for the API usually is provided to facilitate usage and implementation.</p>
+<h3 is-upgraded><strong>Simplicity</strong></h3>
+<p>Programmers tend to solve complex problems, making it easy to let that complexity bleed through to users of our APIs. Keeping them simple requires work, and sometimes presents a serious challenge. Fight the urge to add undue complexity, even when you think it might help. Good APIs offer simplicity, and it takes a good bit of effort to preserve that simplicity.</p>
+<h3 is-upgraded><strong>Abstraction</strong></h3>
+<p>When you successfully hide details from users of your API, leaving only the essentials, you offer them abstraction. Well written code provides abstractions, and APIs are no exception. Your API should hide the details of what it does from your users while making itself useful to them. If your users need to dive into your code or execution to understand, you have provided a poor abstraction.</p>
+<h3 is-upgraded><strong>Consistent and Symmetrical</strong></h3>
+<p>Consistency is relatively easy to understand. Don&#39;t call them &#34;users&#34; sometimes and &#34;customers&#34; at other times. Name the same things the same way. Have a common style. Make your API predictable.</p>
+<p>Symmetry presents a slightly more subtle consideration. When I talk about symmetry, I mean a tendency to close open loops in a way that your users expect. For example, if you have an API for file access that lets you call Open(string filename), you should also offer a Close(string filename) method. Open and close have opposite meanings, so offering both creates symmetry as concerns that operation. Calling the Close method &#34;Destroy&#34; or, worse, not having a close method, would create a great deal of confusion.</p>
+<h2 is-upgraded><strong>What you&#39;ll build</strong></h2>
+<p>In this codelab, you&#39;re going to build two JavaScript Apps.</p>
+<ol type="1" start="1">
+<li><strong>Meet the Noops!</strong></li>
+</ol>
+<ul>
+<li>Consume the Noop API</li>
+<li>Process the response from Noop</li>
+<li>Display the output to user</li>
+</ul>
+<p class="image-container"><img style="width: 624.00px" src="img\b2ae3b3a3f01b299.jpeg"></p>
+<ol type="1" start="2">
+<li> <strong>Build a Noop!</strong></li>
+</ol>
+<ul>
+<li>Build a simple Noop-like API</li>
+<li>Process incoming requests</li>
+<li>Provide a response</li>
+</ul>
+<h2 class="checklist" is-upgraded><strong>What you&#39;ll learn</strong></h2>
+<ul class="checklist">
+<li>How to consume an API?</li>
+<li>How to provide API parameters?</li>
+<li>How to process API response?</li>
+<li>How to build a basic node.js API server?</li>
+<li>How to process API parameters?</li>
+<li>How to provide API response?</li>
+</ul>
+<p>This codelab is focused on APIs. Non-relevant concepts and code blocks are glossed over and are provided for you to simply copy and paste.</p>
+<h2 is-upgraded><strong>What you&#39;ll need</strong></h2>
+<ul>
+<li>WebStorm/Brackets/Sublime Text/VS Code/any other Web IDE/Text editor.</li>
+<li><a href="https://www.getpostman.com/" target="_blank">POSTMan</a></li>
+<li>Web Browser (Chrome/Chromium preferred)</li>
+<li>Knowledge of HTML, CSS, JavaScript, and <a href="https://developer.chrome.com/devtools" target="_blank">Chrome DevTools</a>.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Get the code" duration="5">
+        <p>We&#39;ve put everything you need for this project into a Git repo. To get started, you&#39;ll need to grab the code and open it in your favorite dev environment. It is not mandatory to download the code, but it will be helpful as a reference.</p>
+<h3 is-upgraded><strong>Download code from Git &amp; work locally</strong></h3>
+<p>To download the code and work locally, you&#39;ll need to have a recent version of Git, Node, and code editor setup and ready to go. </p>
+<h3 is-upgraded><a href="https://github.com/gautamchitnis/basic-api-demo" target="_blank">Download Source Code</a></h3>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Building our first web app" duration="45">
+        <h2 is-upgraded><strong>Stage 1 - Basic Setup</strong></h2>
+<p>Create a file named <code>stage-1/index.html</code> in your project and copy/paste the following contents:</p>
+<h3 is-upgraded><a href="https://github.com/gautamchitnis/basic-api-demo/blob/master/app-1/stage-1/index.html" target="_blank">stage-1/index.html</a></h3>
+<pre><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Simple API App&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h2&gt;Hello World!&lt;/h2&gt;
+        The WordBot sent us:
+        &lt;p id=&#34;result&#34;&gt;
+        &lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Here, we have created a simple static webpage that will display some text. You can go ahead and test this by opening the HTML file in a web browser.</p>
+<h2 is-upgraded><strong>Stage 1 - Add Functionality</strong></h2>
+<p>Next, we need to add some functionality to our app, in order to make it useful.</p>
+<p>To do this, we will take some help from the WordBot from the Noops Challenge.</p>
+<p>WordBot provides us an API endpoint that we can access in our web app. The endpoint will return a random word as a response every time we send a request.</p>
+<p>Add the following code to our <code>stage-1/index.html</code> file above <code>head</code> tag.</p>
+<h3 is-upgraded><a href="https://github.com/gautamchitnis/basic-api-demo/blob/master/app-1/stage-1/index.html" target="_blank">stage-1/index.html</a></h3>
+<pre><code>&lt;script type=&#34;application/javascript&#34;&gt;
+     // Set up our HTTP request
+     let xhr = new XMLHttpRequest();
+ 
+     // Setup our listener to process completed requests
+     xhr.onload = function () {
+ 
+           // Process our return data
+           if (xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300) {
+                // What do when the request is successful
+                console.log(&#39;success!&#39;, xhr.response);
+                let result = JSON.parse(xhr.response);
+                document.getElementById(&#34;result&#34;).innerHTML = result.words[0];
+           } else {
+                // What do when the request fails
+                console.log(&#39;The request failed!&#39;);
+           }
+ 
+           // Code that should run regardless of the request status
+           console.log(&#39;This always runs...&#39;);
+     };
+ 
+     // Create and send a GET request
+     // The first argument is the post type (GET, POST, PUT, DELETE, etc.)
+     // The second argument is the endpoint URL
+     xhr.open(&#39;GET&#39;, &#39;https://api.noopschallenge.com/wordbot&#39;);
+     xhr.send();
+&lt;/script&gt;</code></pre>
+<h3 is-upgraded><strong>Dive into the code</strong></h3>
+<p>The above code allows us to perform following functionalities:</p>
+<ul>
+<li>Create an HTTP Request</li>
+<li>Send the HTTP Request</li>
+<li>Perform some logic on response of the HTTP Request</li>
+</ul>
+<h2 is-upgraded><strong>Observing the output</strong></h2>
+<p>Go ahead and refresh the <code>stage-1/index.html</code> page open in your browser after you have added and saved the above code. You should be able to  see an output similar to this:</p>
+<p class="image-container"><img style="width: 500.00px" src="img\1bed50cb0269a398.jpeg"></p>
+<h2 is-upgraded><strong>Stage 2 - Basic Setup</strong></h2>
+<p>Create a file named <code>stage-2/index.html</code> in your project and copy/paste the following contents:</p>
+<h3 is-upgraded><a href="https://github.com/gautamchitnis/basic-api-demo/blob/master/app-1/stage-2/index.html" target="_blank">stage-2/index.html</a></h3>
+<pre><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Simple API App&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h2&gt;Simple MadLibs&lt;/h2&gt;
+        &lt;div style=&#34;display: flex;&#34;&gt;
+            &lt;b&gt;Enter your short story here:&lt;/b&gt;
+            &lt;br&gt;
+            &lt;br&gt;
+            &lt;div style=&#34;width: content;margin-right: 5%;margin-left:5%;&#34;&gt;
+                &lt;textarea rows=&#34;20&#34; cols=&#34;50&#34; id=&#34;source&#34;&gt;&lt;/textarea&gt;
+                &lt;br&gt;
+                &lt;input type=&#34;button&#34; value=&#34;Generate Story!&#34; onclick=&#34;generateMadLib(document.getElementById(&#39;source&#39;).value)&#34;&gt;
+            &lt;/div&gt;
+            &lt;div style=&#34;width: 50%;&#34;&gt;
+                &lt;b&gt;Sample Story:&lt;/b&gt;
+                &lt;br&gt;
+                I am *dinosaurs*. I like to *verbs*.
+                &lt;br&gt;
+                &lt;b&gt;Possible tags:&lt;/b&gt;
+                &lt;br&gt;
+                &lt;span id=&#34;sets&#34; style=&#34;width:50%;word-break:break-word;&#34;&gt;
+                &lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;br&gt;
+        &lt;h3&gt;The Result:&lt;/h3&gt;
+        &lt;br&gt;
+        &lt;div id=&#34;result&#34;&gt;
+            Story will appear here.
+        &lt;/div&gt;
+     &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Here, we have created a simple static webpage that will display some text and input elements. You can go ahead and test this by opening the HTML file in a web browser.</p>
+<h2 is-upgraded><strong>Stage 2 - Add Functionality</strong></h2>
+<p>Now, we will add some functionality to our web app, for the users to actually be able to generate madlibs.</p>
+<p>Add the following code to our <code>stage-2/index.html</code> file above <code>head</code> tag.</p>
+<h3 is-upgraded><a href="https://github.com/gautamchitnis/basic-api-demo/blob/master/app-1/stage-2/index.html" target="_blank">stage-2/index.html</a></h3>
+<pre><code>&lt;script type=&#34;application/javascript&#34;&gt;
+    async function generateMadLib(text) {
+        if(text) {
+           let result = &#34;&#34;;
+           text = text.trim().split(&#34;.&#34;);
+           console.log(text);
+           for(i=0;i&lt;text.length;i++) {
+               entry = text[i];
+               entry = entry.trim();
+               let set = entry.match(/(?&lt;=\*)(.*?)(?=\*)/g);
+               if(set) {
+                  console.log(set);
+                  let res = await fetch(&#39;https://api.noopschallenge.com/wordbot?count=1&amp;set=&#39;+set[0]).then(function(response) {
+                           return response.json();
+                       });
+                  entry = entry.replace(&#34;*&#34;+set[0]+&#34;*&#34;,res.words[0]);
+                  console.log(entry);
+                  result = result+entry+&#34;. &#34;;
+               }
+              }
+            document.getElementById(&#34;result&#34;).innerHTML = result;
+          }
+      }
+        
+        window.onload = function() {
+            let xhr = new XMLHttpRequest();
+
+            // Setup our listener to process completed requests
+            xhr.onload = function () {
+
+                // Process our return data
+                if (xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300) {
+                    // What do when the request is successful
+                    console.log(&#39;success!&#39;, xhr.response);
+                    let result = JSON.parse(xhr.response);
+                    document.getElementById(&#34;sets&#34;).innerHTML = xhr.response.toString().replace(&#34;[&#34;,&#34;&#34;).replace(&#34;]&#34;,&#34;&#34;);
+                } else {
+                    // What do when the request fails
+                    console.log(&#39;The request failed!&#39;);
+                }
+
+                // Code that should run regardless of the request status
+                console.log(&#39;This always runs...&#39;);
+            };
+
+            // Create and send a GET request
+            // The first argument is the post type (GET, POST, PUT, DELETE, etc.)
+            // The second argument is the endpoint URL
+            xhr.open(&#39;GET&#39;, &#39;https://api.noopschallenge.com/wordbot/sets&#39;);
+            xhr.send();
+        }
+    &lt;/script&gt;</code></pre>
+<h3 is-upgraded><strong>Dive into the code</strong></h3>
+<p>Here, we have added the following functionalities to our app:</p>
+<ul>
+<li>Displaying a list of possible tags that can be used in madlibs input when page loads</li>
+<li>Accepting a story with tags written by the user in input box</li>
+<li>Displaying a madlib by replacing tags in user provided input by fetching random words from particular sets of words from WordBot using provided tags</li>
+</ul>
+<h2 is-upgraded><strong>Observing the output</strong></h2>
+<p>Go ahead and refresh the <code>stage-2/index.html</code> page open in your browser after you have added and saved the above code. You should be able to  see an output similar to this:</p>
+<p class="image-container"><img style="width: 624.00px" src="img\2bd7864467470534.jpeg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Congratulations" duration="0">
+        <p>Congratulations, you&#39;ve successfully built your first Web App using APIs! </p>
+<p>You understood the basic API access concepts and you built a meaningful app using only APIs. You learned how to use DevTools to debug an app.</p>
+<p>You now know the key steps required to use APIs in any web app.</p>
+<h2 is-upgraded><strong>What&#39;s next?</strong></h2>
+<p>Now we will move on to build our second app in the workshop outside this codelab.</p>
+<h2 is-upgraded><strong>Further reading</strong></h2>
+<ul>
+<li><a href="https://searchmicroservices.techtarget.com/definition/application-program-interface-API" target="_blank">Tech Target</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Application_programming_interface" target="_blank">Wikipedia</a></li>
+<li><a href="https://www.redhat.com/en/topics/api/what-are-application-programming-interfaces" target="_blank">RedHat</a></li>
+<li><a href="https://www.howtogeek.com/343877/what-is-an-api/" target="_blank">How To Geek</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>
