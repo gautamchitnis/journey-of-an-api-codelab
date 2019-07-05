@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2019-07-05T19:22:24Z",
+  "updated": "2019-07-05T19:33:23Z",
   "id": "journey-of-an-api",
   "duration": 60,
   "title": "Journey of an API",
@@ -24,5 +24,6 @@
     "web"
   ],
   "feedback": "https://github.com/gautamchitnis/api-workshop-codelab/issues",
+  "ga": "UA-143372054-1",
   "url": "journey-of-an-api"
 }
